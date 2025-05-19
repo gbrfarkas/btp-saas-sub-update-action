@@ -136,7 +136,7 @@ describe('run', () => {
             });
         mockInputs();
         await index.run();
-        expect(core.info).toHaveBeenCalledWith('Subscription update in progress... (0/1 updated, 1 in progress, 0 failed)');
+        expect(core.info).toHaveBeenCalledWith('Subscription update status: IN_PROGRESS (0/1 updated, 1 in progress, 0 failed)');
     });
 
     it('should complete successfully', async () => {
