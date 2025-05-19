@@ -1,0 +1,27 @@
+{
+  "name": "btp-saas-sub-update-action",
+  "version": "1.0.0",
+  "description": "SAP BTP SaaS subscription update action",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gbrfarkas/btp-saas-sub-update-action.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gbrfarkas/btp-saas-sub-update-action/issues"
+  },
+  "homepage": "https://github.com/gbrfarkas/btp-saas-sub-update-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
