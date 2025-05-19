@@ -92,7 +92,7 @@ describe('run', () => {
             .mockResolvedValueOnce({
                 ok: true,
                 json: () => Promise.resolve({
-                    state: 'COMPLETED',
+                    state: 'SUCCEEDED',
                     error: null,
                     stateDetails: {
                         batchOperationDetails: {
@@ -146,7 +146,7 @@ describe('run', () => {
             .mockResolvedValueOnce({
                 ok: true,
                 json: () => Promise.resolve({
-                    state: 'COMPLETED',
+                    state: 'SUCCEEDED',
                     error: null,
                     stateDetails: {
                         batchOperationDetails: {
