@@ -34,7 +34,6 @@ async function fetchToken(tokenURL, clientID, clientSecret) {
 }
 
 async function startBatchUpdate(apiURL, accessToken) {
-    console.log(apiURL);
     const response = await fetch(
         new URL('/saas-manager/v1/application/subscriptions/batch', apiURL),
         {
@@ -79,7 +78,7 @@ async function waitForJobCompletion(apiURL, accessToken, location, timeout, inte
         const { state, error, stateDetails } = await getJobStatus(apiURL, accessToken, location);
         const { updateSummary } = stateDetails.batchOperationDetails;
 
-        if (state === "COMPLETED") {
+        if (state === "SUCCEEDED") {
             if (updateSummary.failed > 0) {
                 throw new Error(`Subscription update failed for ${updateSummary.failed} tenant(s).`);
             }

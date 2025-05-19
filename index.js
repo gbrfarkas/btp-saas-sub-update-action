@@ -82,7 +82,7 @@ async function waitForJobCompletion(apiURL, accessToken, location, timeout, inte
             throw new Error(`Subscription update failed: ${error.description}`);
         }
 
-        core.info(`Subscription update in progress... (${updateSummary.updated}/${updateSummary.totalRequested} updated, ${updateSummary.inProgress} in progress, ${updateSummary.failed} failed)`);
+        core.info(`Subscription update status: ${state} (${updateSummary.updated}/${updateSummary.totalRequested} updated, ${updateSummary.inProgress} in progress, ${updateSummary.failed} failed)`);
         await new Promise((resolve) => setTimeout(resolve, interval));
     }
 

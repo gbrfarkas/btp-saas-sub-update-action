@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --coverage",
-    "lint": "npx eslint ."
+    "lint": "npx eslint .",
+    "build": "npx @vercel/ncc build index.js --license licenses.txt && npx convert-action"
   },
   "repository": {
     "type": "git",
