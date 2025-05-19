@@ -2,25 +2,25 @@ name: 'SAP BTP Update SaaS Subscriptions'
 description: 'Updates all SaaS subscriptions for a multitenant application in SAP BTP'
 inputs:
   api-url:
-    description: 'The URL of the SaaS Provisioning Service API'
+    description: 'The base URL of the SaaS Provisioning Service API'
     required: true
   token-url:
     description: 'The URL of the token endpoint'
     required: true
   client-id:
-    description: 'Client ID for OAuth2 authentication'
+    description: 'Client ID'
     required: true
   client-secret:  
-    description: 'Client secret for OAuth2 authentication'
+    description: 'Client secret'
     required: true
   timeout:
     description: 'Timeout in seconds'
     required: false
-    default: 120
+    default: '120'
   interval:
     description: 'Check interval in seconds'
     required: false
-    default: 5
+    default: '5'
 runs:
   using: 'node20'
   main: 'dist/index.js'
