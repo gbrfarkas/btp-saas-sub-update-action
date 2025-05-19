@@ -1,6 +1,6 @@
 on: [push]
 
-job:
+jobs:
   test:
     runs-on: ubuntu-latest
     name: Lint and Test
