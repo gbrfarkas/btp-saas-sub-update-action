@@ -31,7 +31,7 @@ Interval to check the status of the update, in seconds. Default value: 5.
 ## Example usage
 
 ```yaml
-uses: gbrfarkas/btp-saas-update-action
+uses: gbrfarkas/btp-saas-update-action@v1
 with:
   api-url: 'https://saas-manager.cfapps.<region>.hana.ondemand.com'
   token-url: 'https://<...>.authentication.<region>.hana.ondemand.com/oauth/token'
