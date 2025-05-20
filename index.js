@@ -29,7 +29,10 @@ async function fetchToken(tokenURL, clientID, clientSecret) {
 
 async function startBatchUpdate(apiURL, accessToken) {
     const response = await fetch(
-        new URL('/saas-manager/v1/application/subscriptions/batch', apiURL),
+        new URL(
+            '/saas-manager/v1/application/subscriptions/batch',
+            apiURL
+        ),
         {
             method: "PATCH",
             headers: {
@@ -43,7 +46,9 @@ async function startBatchUpdate(apiURL, accessToken) {
     );
 
     if (!response.ok) {
-        throw new Error(`Error while starting batch update: ${response.statusText}`);
+        throw new Error(
+            `Error while starting batch update: ${response.statusText}`
+        );
     }
 
     return response.headers.get("location");
@@ -63,26 +68,48 @@ async function getJobStatus(apiURL, accessToken, location) {
     }
 
     return await response.json();
-};
+}
 
-async function waitForJobCompletion(apiURL, accessToken, location, timeout, interval) {
+async function waitForJobCompletion(
+    apiURL,
+    accessToken,
+    location,
+    timeout,
+    interval
+) {
     const startTime = Date.now();
 
     while (Date.now() - startTime < timeout) {
-        const { state, error, stateDetails } = await getJobStatus(apiURL, accessToken, location);
+        const { state, error, stateDetails } = await getJobStatus(
+            apiURL,
+            accessToken,
+            location
+        );
         const { updateSummary } = stateDetails.batchOperationDetails;
 
         if (state === "SUCCEEDED") {
             if (updateSummary.failed > 0) {
-                throw new Error(`Subscription update failed for ${updateSummary.failed} tenant(s).`);
+                throw new Error(
+                    `Subscription update failed for ${updateSummary.failed} tenant(s).`
+                );
             }
-            core.info(`Subscription update completed successfully for ${updateSummary.updated} tenant(s).`);
+            core.info(
+                `Subscription update completed successfully for ${updateSummary.updated} tenant(s).`
+            );
             return;
         } else if (state === "FAILED") {
-            throw new Error(`Subscription update failed: ${error.description}`);
+            throw new Error(
+                `Subscription update failed: ${error.description}`
+            );
         }
 
-        core.info(`Subscription update status: ${state} (${updateSummary.updated}/${updateSummary.totalRequested} updated, ${updateSummary.inProgress} in progress, ${updateSummary.failed} failed)`);
+        core.info(
+            `Subscription update status: ${state} (${updateSummary.updated}/` +
+            `${updateSummary.totalRequested} updated, ` +
+            `${updateSummary.inProgress} in progress, ` +
+            `${updateSummary.failed} failed)`
+        );
+
         await new Promise((resolve) => setTimeout(resolve, interval));
     }
 
@@ -99,7 +126,13 @@ async function run() {
         const interval = parseInt(core.getInput('interval'), 10) * 1000;
         const accessToken = await fetchToken(tokenURL, clientID, clientSecret);
         const location = await startBatchUpdate(apiURL, accessToken);
-        await waitForJobCompletion(apiURL, accessToken, location, timeout, interval);
+        await waitForJobCompletion(
+            apiURL,
+            accessToken,
+            location,
+            timeout,
+            interval
+        );
     } catch (error) {
         core.setFailed(error.message);
     }
