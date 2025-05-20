@@ -2,7 +2,7 @@
   "name": "btp-saas-sub-update-action",
   "version": "1.0.0",
   "description": "SAP BTP SaaS subscription update action",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "jest --coverage",
     "lint": "npx eslint .",
